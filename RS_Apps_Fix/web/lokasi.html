@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--<html xmlns="http://www.w3.org/1999/xhtml">-->
+<html>
+    <head>
+        <title>Rumah Sakit Tobby Uzumaki</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" type="text/css" href="medical-clinic/style.css" media="screen" />
+        <!--[if IE 6]>
+        <link rel="stylesheet" type="text/css" href="medical-clinic/iecss.css" />
+        <![endif]-->
+
+    </head>
+    <body>
+        <div id="main_container">
+            <div class="header">
+                <div id="logo"><a href="#"><img src="medical-clinic/images/logo.png" alt="" width="162" height="54" border="0" /></a></div>
+                <div class="right_header">
+                    <div class="top_menu"> <a href="Login.html" class="login">login</a> 
+                        <div id="menu">
+                            <ul>
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="dokter.html">Dokter</a></li>
+                                <li><a href="antrian.html">Antrian</a></li>
+                                <li><a href="klinik.html">Klinik</a></li>
+                                <li><a href="pasien.html">Pasien</a></li>
+                                <li><a class="current" href="lokasi.html">Lokasi</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="middle_box">
+                    <div class="middle_box_content"><img src="medical-clinic/images/banner_content.jpg" alt="" /></div>
+                </div>            
+            </div>
+            <div class="col-lg-9">  
+                <head>
+                    <style>
+                        /* Always set the map height explicitly to define the size of the div
+                         * element that contains the map. */
+                        #map {
+                            height:500%;
+                            width: 100%;
+                        }
+                        /* Optional: Makes the sample page fill the window. */
+                        html, body {
+                            height: 100%;
+                            margin: 0;
+                            padding: 0;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <br>
+                        <br>
+                            <center><button type="button" onclick="loadDoc()" id="btn">Lokasi Rumah Sakit</button><br><br></center>
+
+                                        <p id="demo"></p>
+                                        <div id="map"></div>
+
+                                        <script>
+                                            function loadDoc() {
+                                                var map;
+                                                //var url = "http://202.94.83.190:8080/Service_rsku165314079/webresources/Lokasi/getLocation";
+                                                var url = "http://202.94.83.190:8080/Service_rsku165314079/webresources/Lokasi";
+                                                //var url = "http://202.94.83.190:8080/apilocation/webresources/Location";
+                                                var xhttp = new XMLHttpRequest();
+                                                xhttp.onreadystatechange = function () {
+                                                    if (this.readyState == 4 && this.status == 200) {
+                                                        document.getElementById("demo").innerHTML = this.responseText;
+                                                        var obj = JSON.parse(this.responseText);
+                                                        map = new google.maps.Map(document.getElementById('map'), {
+                                                            center: {lat: obj[0].lat, lng: obj[0].lng},
+                                                            zoom: 8
+                                                        });
+                                                        var marker = [];
+                                                        for (var i = 0; i < obj.length; i++) {
+                                                            marker[i] = new google.maps.Marker({position: {lat: obj[i].lat, lng: obj[i].lng}, map: map});
+                                                        }
+                                                    }
+                                                };
+                                                xhttp.open("GET", url, true);
+                                                xhttp.send();
+                                            }
+                                        </script>
+                                        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnD2l64I6G6fUkPpc3D79Jcau30v8xEKE&callback=initMap"
+                                        async defer></script> 
+                                        </body>
+                                        </div>
+                                        </div>
+                                        </body>
+                                        </html>

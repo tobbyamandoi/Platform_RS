@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Rumah Sakit Tobby Uzumaki</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" type="text/css" href="medical-clinic/style.css" media="screen" />
+        <!--[if IE 6]>
+        <link rel="stylesheet" type="text/css" href="medical-clinic/iecss.css" />
+        <![endif]-->
+    </head>
+    <body>
+        <div id="main_container">
+            <div class="header">
+                <div id="logo"><a href="#"><img src="medical-clinic/images/logo.png" alt="" width="162" height="54" border="0" /></a></div>
+                <div class="right_header">
+                    <div class="top_menu"> <a href="Login.html" class="login">login</a> 
+                        <div id="menu">
+                            <ul>
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="dokter.html">Dokter</a></li>
+                                <li><a href="antrian.html">Antrian</a></li>
+                                <li><a href="klinik.html">Klinik</a></li>
+                                <li><a class="current" href="pasien.html">Pasien</a></li>
+                                <li><a href="lokasi_2.html">Lokasi</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="middle_box">
+                    <div class="middle_box_content"><img src="medical-clinic/images/banner_content.jpg" alt="" /></div>
+                </div>
+                <div class="col-lg-9">
+
+                    <head>
+                        <style>
+                            h1 {
+                                border-bottom: 3px solid #cc9900;
+                                color: #996600;
+                                font-size: 30px;
+                            }
+                            table, th , td  {
+                                position: relative;
+                                border-collapse: collapse;
+                                padding: 10px;                               
+
+                            }
+                            table tr:nth-child(odd) {
+                                background-color: #f1f1f1;
+                            }
+                            table tr:nth-child(even) {
+                                background-color: #ffffff;
+                            }
+                        </style>
+                    </head>
+                    <body>
+
+
+                        <br>
+                            <br>
+
+                                <center><button type="button" onclick="loadDoc()" id="btn">Daftar Pasien</button><br><br></center>
+
+                                            <div id="id01"></div>
+
+                                            <script>
+                                                function loadDoc() {
+                                                    var xmlhttp = new XMLHttpRequest();
+                                                    var url = "http://202.94.83.190:8080/Service_rsku165314079/webresources/Pasien";
+                                                    xmlhttp.onreadystatechange = function () {
+                                                        if (this.readyState == 4 && this.status == 200) {
+                                                            myFunction(this.responseText);
+                                                        }
+                                                    }
+                                                    xmlhttp.open("GET", url, true);
+                                                    xmlhttp.send();
+                                                    function myFunction(response) {
+                                                        var arr = JSON.parse(response);
+                                                        var i;
+                                                        var out = "<center><table align='center' style='width: 60%;' border='1'> <tr><td>NO Rekam Medis</td><td>Nama</td><td>Alamat</td><td>Tanggal Lahir</td><td>Jenis Kelamin</td></tr></center>";
+                                                        for (i = 0; i < arr.length; i++) {
+                                                            out += "<tr><td>" +
+                                                                    arr[i].noRm +
+                                                                    "</td><td>" +
+                                                                    arr[i].nama +
+                                                                    "</td><td>" +
+                                                                    arr[i].alamat +
+                                                                    "</td><td>" +
+                                                                    arr[i].tanggalLahir +
+                                                                    "</td><td>" +
+                                                                    arr[i].kelamin;
+                                                        }
+                                                        out += "<center></table></center>";
+                                                        document.getElementById("id01").innerHTML = out;
+                                                    }
+                                                }
+                                            </script>
+                                            <!--  <div class="pattern_bg">
+                                                <div class="pattern_box">
+                                                  <div class="pattern_box_icon"><img src="medical-clinic/images/icon1.png" alt="" width="70" height="112" /></div>
+                                                  <div class="pattern_content">
+                                                    <h1>My <span class="blue">Medicine</span></h1>
+                                                    <p class="pat"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                                                  </div>
+                                                </div>
+                                                <div class="pattern_box">
+                                                  <div class="pattern_box_icon"><img src="medical-clinic/images/icon2.png" alt="" width="70" height="112" /></div>
+                                                  <div class="pattern_content">
+                                                    <h1>Search <span class="blue"> Treatments</span></h1>
+                                                    <p class="pat"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div id="main_content">
+                                                <div class="box_content">
+                                                  <div class="box_title">
+                                                    <div class="title_icon"><img src="medical-clinic/images/mini_icon1.gif" alt="" /></div>
+                                                    <h2>My <span class="dark_blue">Events</span></h2>
+                                                  </div>
+                                                  <div class="box_text_content"> <img src="medical-clinic/images/calendar.gif" alt="" class="box_icon" />
+                                                    <div class="box_text"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div>
+                                                    <a href="#" class="details">+ details</a> </div>
+                                                  <div class="box_text_content"> <img src="medical-clinic/images/calendar.gif" alt="" class="box_icon" />
+                                                    <div class="box_text"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div>
+                                                    <a href="#" class="details">+ details</a> </div>
+                                                </div>
+                                                <div class="box_content">
+                                                  <div class="box_title">
+                                                    <div class="title_icon"><img src="medical-clinic/images/mini_icon2.gif" alt="" /></div>
+                                                    <h2>My <span class="dark_blue"> Goals</span></h2>
+                                                  </div>
+                                                  <div class="box_text_content"> <img src="medical-clinic/images/checked.gif" alt="" class="box_icon" />
+                                                    <div class="box_text"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div>
+                                                    <a href="#" class="details">+ details</a> </div>
+                                                  <div class="box_text_content"> <img src="medical-clinic/images/checked.gif" alt="" class="box_icon" />
+                                                    <div class="box_text"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div>
+                                                    <a href="#" class="details">+ details</a> </div>
+                                                </div>
+                                                <div class="box_content">
+                                                  <div class="box_title">
+                                                    <div class="title_icon"><img src="medical-clinic/images/mini_icon3.gif" alt="" /></div>
+                                                    <h2>My <span class="dark_blue">Sleep</span></h2>
+                                                  </div>
+                                                  <div class="box_text_content"> <img src="medical-clinic/images/checked.gif" alt="" class="box_icon" />
+                                                    <div class="box_text"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div>
+                                                    <a href="#" class="details">+ details</a> </div>
+                                                  <div class="box_text_content"> <img src="medical-clinic/images/checked.gif" alt="" class="box_icon" />
+                                                    <div class="box_text"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div>
+                                                    <a href="#" class="details">+ details</a> </div>
+                                                </div>
+                                                <div class="clear"></div>
+                                              </div>-->
+                                            <div id="footer">
+                                                <div class="copyright"> <img src="medical-clinic/images/footer_logo.gif" alt="" /> </div>
+                                                <div class="center_footer">&copy; Medical Clinic 2008. All Rights Reserved</div>
+                                                <div class="footer_links"> <a href="http://csstemplatesmarket.com"><img src="medical-clinic/images/csstemplatesmarket.gif" alt="" border="0" /></a> </div>
+                                            </div>
+                                            </div>
+                                            </body>
+                                            </html>
